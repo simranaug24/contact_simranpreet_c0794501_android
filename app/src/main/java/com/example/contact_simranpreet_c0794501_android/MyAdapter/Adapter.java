@@ -115,6 +115,18 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyHolder> implements F
             }
         });
 
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Intent email = new Intent(Intent.ACTION_SEND);
+                email.putExtra(Intent.EXTRA_EMAIL,new String[]{model.getEmail()});
+                email.setType("text/plain");
+                context.startActivity(Intent.createChooser(email,"How To send mail"));
+
+                return true;
+            }
+        });
+
     }
 
     @Override
