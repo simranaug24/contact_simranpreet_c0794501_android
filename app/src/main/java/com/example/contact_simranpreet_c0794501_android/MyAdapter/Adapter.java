@@ -109,9 +109,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyHolder> implements F
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, UpdateActivity.class);
-                intent.putExtra("id", model.getId());
-                context.startActivity(intent);
+               Intent intetn = new Intent(context,UpdateActivity.class);
+               intetn.putExtra("id",model.getId());
+               context.startActivity(intetn);
             }
         });
 

@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Contact_simranpreet_c0794501_android">
-        <activity android:name=".Update"></activity>
+        <activity android:name=".UpdateActivity"></activity>
         <activity android:name=".showContact" />
         <activity android:name=".MainActivity">
             <intent-filter>

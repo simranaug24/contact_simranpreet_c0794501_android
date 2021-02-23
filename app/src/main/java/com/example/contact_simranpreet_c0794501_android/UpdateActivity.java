@@ -6,12 +6,15 @@ import android.content.Intent;
 import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.contact_simranpreet_c0794501_android.Model.RowModel;
+
+import java.util.ArrayList;
 
 public class UpdateActivity extends AppCompatActivity {
 
@@ -29,13 +32,13 @@ public class UpdateActivity extends AppCompatActivity {
 
         int incomingId = getIntent().getIntExtra("id",1);
          helper = new SQLiteHelper(this);
-         
+        Log.i("TAG", "onCreate: "+incomingId);
          model = helper.getOneContact(incomingId);
          
          
         FirstName = findViewById(R.id.edtFirstname);
-        LastName = findViewById(R.id.edtLastName);
-        EmailID = findViewById(R.id.edtEmail);
+        LastName = findViewById(R.id.edtLastname);
+        EmailID = findViewById(R.id.edtEid);
         Phone = findViewById(R.id.edtPhn);
         Address = findViewById(R.id.edtAdd);
         btnupdate = findViewById(R.id.btnUpdate);
@@ -45,14 +48,13 @@ public class UpdateActivity extends AppCompatActivity {
        EmailID.setText(model.getEmail());
        Phone.setText(model.getPhone());
        Address.setText(model.getAddress());
-       
-       
+
        btnupdate.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-             boolean bool =   helper.updateData(incomingId,FirstName.getText().toString(),LastName.getText().toString(),EmailID.getText().toString(),Phone.getText().toString(),Address.getText().toString());
+             long bool =   helper.updateData(incomingId,FirstName.getText().toString(),LastName.getText().toString(),EmailID.getText().toString(),Phone.getText().toString(),Address.getText().toString());
 
-               if (bool == false) {
+               if (bool != -1) {
                    Toast.makeText(UpdateActivity.this, "Updated...", Toast.LENGTH_SHORT).show();
                    Intent intent = new Intent(UpdateActivity.this,showContact.class);
                    startActivity(intent);

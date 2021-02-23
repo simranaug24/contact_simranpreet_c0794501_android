@@ -59,7 +59,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     }
 
     // update data
-    public boolean updateData(int ID,String Fname, String Lname, String email, String phone , String address)
+    public long updateData(int ID,String Fname, String Lname, String email, String phone , String address)
     {
         SQLiteDatabase database =getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -72,14 +72,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
             long result = database.update(tableName, values, Id + " = ? ", new String[]{String.valueOf(ID)});
 
-            if(result == -1)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return result;
 
 
     }
@@ -143,7 +136,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         RowModel model = new RowModel();
         Cursor cursor = null;
 
-        cursor = data.rawQuery("SELECT * FROM " + tableName, null);
+        cursor = data.rawQuery("SELECT * FROM " + tableName+ " WHERE Id = ?", new String[]{String.valueOf(id)});
         if (cursor != null) {
             while (cursor.moveToNext()) {
                 String fName = cursor.getString(0);
@@ -154,6 +147,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 int Id = cursor.getInt(5);
 
                 model = new RowModel(fName,lName,Email,Phone,Address,Id);
+
 
 
             }

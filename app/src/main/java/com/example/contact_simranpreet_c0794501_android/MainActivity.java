@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this,showContact.class);
 
                 startActivity(intent);
+                finish();
             }
         });
     }
